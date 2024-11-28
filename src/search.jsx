@@ -3,7 +3,6 @@ import Favorite from "../img/favorite.svg?react";
 import Female from "../img/female.svg?react";
 import Male from "../img/male.svg?react";
 import Location from "../img/location.svg?react";
-import Cat from "../img/cat-3297664_1280.jpg";
 import SearchRect from "./searchRect";
 
 const search = () => {

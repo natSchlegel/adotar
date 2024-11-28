@@ -1,25 +1,65 @@
-import React from 'react'
+import React from "react";
+import Cat from "../img/cat.jpg";
+import Male from "../img/male.svg?react";
+import styles from "./searchRect.module.css";
+import localizacao from "../img/location.svg?react";
+import Mail from "../img/mail.svg?react";
+import Call from "../img/call.svg?react";
 
 const searchRect = () => {
   return (
     <div>
-                <div className="col">
-          <div className="card shadow-sm">
-            <svg className="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div className="card-body">
-              <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="btn-group">
-                  <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small className="text-body-secondary">9 mins</small>
+      <div className="col">
+        <div className="card shadow-sm">
+          <img src={Cat} />
+          <div className="card-body">
+            <div className={styles.tituloGato}>
+              <span className={styles.nomeAnimal}>Nome do Animal</span>
+              <img src={Male} />
+            </div>
+            <div className={styles.localizacao}>
+              <img src={localizacao} />
+              <span className={styles.localizacaoCidade}>Diamantina - MG</span>
+            </div>
+
+            <p className="card-text">
+              This is a wider card with supporting text below as a natural
+              lead-in to additional content. This content is a little bit
+              longer.
+            </p>
+
+            <div className={styles.infoContainer}>
+              <div className={styles.infoBox}>
+                <span>3,2 Kg</span>
+                <div className={styles.label}>PESO</div>
+              </div>
+              <div className={styles.infoBox}>
+                <span>9 A</span>
+                <div className={styles.label}>IDADE</div>
+              </div>
+              <div className={styles.infoBox}>
+                <span>22 cm</span>
+                <div className={styles.label}>ALTURA</div>
+              </div>
+            </div>
+
+            <div className={styles.dono}>
+              <div className={styles.circle}></div>
+              <span>Nome do Done</span>
+              <div className={styles.iconesContato}>
+              <circle className={styles.circleCall}>
+                <img className={styles.callsvg} src={Call} />
+              </circle>
+              <circle className={styles.circleMail}>
+              <img className={styles.mallsvg} src={Mail} />
+              </circle>
               </div>
             </div>
           </div>
-          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default searchRect
+export default searchRect;
