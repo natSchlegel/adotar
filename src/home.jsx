@@ -7,7 +7,6 @@ import Search from './search';
 const home = () => {
   return (
     <div>
-      <Header />
       <Banner />
       <Search />
     </div>
