@@ -1,0 +1,6 @@
+.container{
+    background: url('../img/voluntariado.jpg') no-repeat;
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
