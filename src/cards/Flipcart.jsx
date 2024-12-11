@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
-import styles from "./Flipcart.module.css";
+import "./Flipcart.module.css";
 import cat from "../../img/cat.jpg?react";
 import CardDetail from "../../img/cards/first.svg?react";
 
@@ -14,7 +14,7 @@ const FlipCard = ({data}) => {
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       {/* Front Side */}
-      <div className={styles.cardPersonalized} onClick={handleClick}>
+      <div className="cardPersonalized"  onClick={handleClick}>
         <img src={cat} className={styles.img} alt="Cat" />
         <div className={styles.cardText}>
           <span className={styles.animalName}>{data.name}</span>

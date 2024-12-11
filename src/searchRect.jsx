@@ -18,28 +18,65 @@ const searchRect = () => {
       genero: "Fêmea",
       meses: 13,
       localizacao: "Diamantina",
-      saude: 
-        {
-          esterilizado: true,
-          vacinado: false,
-          desparasitado: true,
-        },
-      
-      especial: 
-        {
-          deficiente: false,
-          hiv: false,
-        },
-      
+      saude: {
+        esterilizado: true,
+        vacinado: false,
+        desparasitado: true,
+      },
+
+      especial: {
+        deficiente: false,
+        hiv: false,
+      },
+    },
+    {
+      id: 2,
+      name: "Kael",
+      especie: "Gato",
+      raca: "Indefinida",
+      genero: "Fêmea",
+      meses: 13,
+      localizacao: "Diamantina",
+      saude: {
+        esterilizado: true,
+        vacinado: false,
+        desparasitado: true,
+      },
+
+      especial: {
+        deficiente: false,
+        hiv: false,
+      },
+    },
+    {
+      id: 3,
+      name: "Flor",
+      especie: "Gato",
+      raca: "Indefinida",
+      genero: "Fêmea",
+      meses: 13,
+      localizacao: "Diamantina",
+      saude: {
+        esterilizado: true,
+        vacinado: false,
+        desparasitado: true,
+      },
+
+      especial: {
+        deficiente: false,
+        hiv: false,
+      },
     },
   ];
 
   return (
-    <div>
-      {data.map((cat) => (
-        <FlipCard key={cat.id} data={cat} />
-      ))}
-    </div>
+    <>
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4">
+        {data.map((cat) => (
+          <FlipCard key={cat.id} data={cat} />
+        ))}
+      </div>
+    </>
   );
 };
 
