@@ -9,15 +9,36 @@ import ReactCardFlip from "react-card-flip";
 import FlipCard from "./cards/Flipcart";
 
 const searchRect = () => {
-  const [isFlipped, setIsFlipped] = React.useState(false);
-
-  function flipCard() {
-    setIsFlipped(!isFlipped);
-  }
+  const data = [
+    {
+      id: 1,
+      name: "Lorde",
+      especie: "Gato",
+      raca: "Indefinida",
+      genero: "Fêmea",
+      meses: 13,
+      localizacao: "Diamantina",
+      saude: 
+        {
+          esterilizado: true,
+          vacinado: false,
+          desparasitado: true,
+        },
+      
+      especial: 
+        {
+          deficiente: false,
+          hiv: false,
+        },
+      
+    },
+  ];
 
   return (
     <div>
-      <FlipCard />
+      {data.map((cat) => (
+        <FlipCard key={cat.id} data={cat} />
+      ))}
     </div>
   );
 };

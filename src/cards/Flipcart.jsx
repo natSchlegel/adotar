@@ -4,7 +4,7 @@ import styles from "./Flipcart.module.css";
 import cat from "../../img/cat.jpg?react";
 import CardDetail from "../../img/cards/first.svg?react";
 
-const FlipCard = () => {
+const FlipCard = ({data}) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
@@ -16,16 +16,20 @@ const FlipCard = () => {
       {/* Front Side */}
       <div className={styles.cardPersonalized} onClick={handleClick}>
         <img src={cat} className={styles.img} alt="Cat" />
-        <div class={styles.cardText}>
-          <span className={styles.animalName}>Nome do Animal</span>
-          <span className={styles.age}>14 meses, fêmea</span>
-          <span className={styles.location}>Diamantina - MG</span>
+        <div className={styles.cardText}>
+          <span className={styles.animalName}>{data.name}</span>
+          <span className={styles.age}>{data.meses} meses, {data.genero}</span>
+          <span className={styles.location}>{data.localizacao} - MG</span>
         </div>
       </div>
       {/* Back Side */}
       <div className={styles.cardPersonalized} onClick={handleClick}>
-        <h3>Back Side</h3>
-        <p>Click to flip back!</p>
+        <h3>Health Details</h3>
+        <ul>
+          <li>Esterilizado: {data.saude.esterilizado ? "Yes" : "No"}</li>
+          <li>Vacinado: {data.saude.vacinado ? "Yes" : "No"}</li>
+          <li>Desparasitado: {data.saude.desparasitado ? "Yes" : "No"}</li>
+        </ul>
       </div>
     </ReactCardFlip>
   );
