@@ -1,15 +1,33 @@
 .cardPersonalized {
-  width: 208px;
-  height: 328px;
+  width: 312px;
+  height: 416px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
+  display: grid;
+  flex-direction: row;
+  align-items: right;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   background-color: #f9f9f9;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  gap:10px;
+}
+
+.animalName {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.cardText {
+  display: grid;
+  padding-bottom: 10px;
+  font-size: large;
+  padding-bottom: 10px;
+}
+
+.div.cardText span {
+  font-size: 14px;
 }
 
 .img {
@@ -18,18 +36,19 @@
   object-fit: cover;
   display: block;
 }
+
 .cardContent {
   position: absolute;
   bottom: 20px;
   left: 20px;
   color: white;
-  z-index: 10; /* Ensure it appears above the image */
-  background-color: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background for better contrast */
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 8px;
 }
 
-.divStyle{
+.divStyle {
   border-color: #555;
 }
 

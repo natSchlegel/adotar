@@ -14,7 +14,7 @@ const search = () => {
       {/* <FormSearch /> */}
 
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-          <SearchRect /><SearchRect /><SearchRect /><SearchRect /><SearchRect /><SearchRect /><SearchRect /><SearchRect />
+          <SearchRect />
         </div>
       </div>
     </div>
