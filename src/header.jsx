@@ -18,7 +18,7 @@ const header = () => {
                 role="img"
                 aria-label="Bootstrap"
               >
-                <use xlink:href="#bootstrap" />
+                <use xlinkHref="#bootstrap" />
               </svg>
             </a>
 

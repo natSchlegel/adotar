@@ -5,24 +5,24 @@ const formSearch = () => {
     <div>
       <form id="animalForm">
         <div>
-          <div class="mb-3">
-            <label for="especie" class="form-label">
+          <div className="mb-3">
+            <label className="form-label">
               Espécie
             </label>
-            <select id="especie" name="especie" class="form-select" required>
+            {/* <select id="especie" name="especie" className="form-select" required>
               <option value="" disabled selected>
                 Escolha a espécie
               </option>
               <option value="Gato">GATO</option>
               <option value="Cachorro">CACHORRO</option>
-            </select>
+            </select> */}
           </div>
 
-          <div class="mb-3">
-            <label for="porte" class="form-label">
+          <div className="mb-3">
+            <label for="porte" className="form-label">
               Porte
             </label>
-            <select id="porte" name="porte" class="form-select" required>
+            <select id="porte" name="porte" className="form-select" required>
               <option value="" disabled selected>
                 Escolha o porte
               </option>
@@ -32,11 +32,11 @@ const formSearch = () => {
             </select>
           </div>
 
-          <div class="mb-3">
-            <label for="idade" class="form-label">
+          <div className="mb-3">
+            <label for="idade" className="form-label">
               Idade
             </label>
-            <select id="idade" name="idade" class="form-select" required>
+            <select id="idade" name="idade" className="form-select" required>
               <option value="" disabled selected>
                 Escolha a idade
               </option>
@@ -47,11 +47,11 @@ const formSearch = () => {
             </select>
           </div>
 
-          <div class="mb-3">
-            <label for="sexo" class="form-label">
+          <div className="mb-3">
+            <label for="sexo" className="form-label">
               Sexo
             </label>
-            <select id="sexo" name="sexo" class="form-select" required>
+            <select id="sexo" name="sexo" className="form-select" required>
               <option value="" disabled selected>
                 Escolha o sexo
               </option>
@@ -60,7 +60,7 @@ const formSearch = () => {
             </select>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Enviar
         </button>
       </form>

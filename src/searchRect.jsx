@@ -17,7 +17,8 @@ const searchRect = () => {
 
   return (
     <div>
-      <div className="col">
+      <FlipCard />
+      {/* <div className="col">
         <div className="card shadow-sm">
           <img src={Cat} />
           <div className="card-body">
@@ -65,7 +66,7 @@ const searchRect = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
