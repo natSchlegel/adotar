@@ -19,13 +19,17 @@ const searchRect = () => {
       meses: 13,
       localizacao: "Diamantina",
       saude: {
-        esterilizado: true,
-        vacinado: false,
+        esterilizado: false,
+        vacinado: true,
         desparasitado: true,
       },
-
+      lidaBem: {
+        gato: false,
+        crianca: true,
+        cachorro: true,
+      },
       especial: {
-        deficiente: false,
+        deficiente: true,
         hiv: false,
       },
     },
@@ -42,28 +46,13 @@ const searchRect = () => {
         vacinado: false,
         desparasitado: true,
       },
-
-      especial: {
-        deficiente: false,
-        hiv: false,
+      lidaBem: {
+        gato: false,
+        crianca: true,
+        cachorro: false,
       },
-    },
-    {
-      id: 3,
-      name: "Flor",
-      especie: "Gato",
-      raca: "Indefinida",
-      genero: "Fêmea",
-      meses: 13,
-      localizacao: "Diamantina",
-      saude: {
-        esterilizado: true,
-        vacinado: false,
-        desparasitado: true,
-      },
-
       especial: {
-        deficiente: false,
+        deficiente: true,
         hiv: false,
       },
     },
