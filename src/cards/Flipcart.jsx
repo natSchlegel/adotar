@@ -2,31 +2,30 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import styles from "./Flipcart.module.css";
 import catImg from "../../img/cat.jpg?react";
-
+import Icons from "./Icons";
 import happyCat from "../../img/happyCat.svg";
 import sadCat from "../../img/sadCat.svg";
 import dog from "../../img/dog.svg";
 import cat from "../../img/cat.svg";
-import children from "../../img/children.svg";
 
-import CardDetail from "../../img/cards/first.svg?react";
-
-
-
-
-const FlipCard = ({data}) => {
+const FlipCard = ({ data }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
 
+  const adoptMe = (event) => {
+    event.preventDefault();
+    window.alert("Test");
+  }
+
   console.log(data);
 
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       {/* Front Side */}
-      <div className={`${styles.cardPersonalized} card d-flex flex-column align-items-center justify-content-center text-left bg-light shadow-sm`}  onClick={handleClick}>
+      <div className={`${styles.cardPersonalized} card d-flex flex-column align-items-center justify-content-center text-left bg-light shadow-sm`} onClick={handleClick}>
         <img src={catImg} className={styles.img} alt="Cat" />
         <div className={styles.cardText}>
           <span className={styles.animalName}>{data.name}</span>
@@ -36,19 +35,29 @@ const FlipCard = ({data}) => {
       </div>
       {/* Back Side */}
       <div className={styles.cardPersonalized} onClick={handleClick}>
-      <span className={styles.animalName}>{data.name}</span>
-      <span className={styles.raca}>{data.raca}</span>
-
-        
-          <span>{data.saude.esterilizado ? <img src={happyCat} style={{ width: '45px', height: '45px' }}/> : <img src={sadCat} style={{ width: '45px', height: '45px' }}/>} Esterilizado</span>
-          <span>{data.saude.vacinado ?<img src={happyCat} style={{ width: '45px', height: '45px' }}/> : <img src={sadCat} style={{ width: '45px', height: '45px' }}/>} Vacinado</span>
-          <span>{data.saude.desparasitado ? <img src={happyCat} style={{ width: '45px', height: '45px' }}/> : <img src={sadCat} alt="Não-desparasitado" style={{ width: '45px', height: '45px' }}/> } Desparasitado</span>
-          <span className={styles.raca}>Se dá bem com:</span>
-          <span>{data.lidaBem.gato ? <div><img src={cat} style={{ width: '45px', height: '45px' }}/>Outros gatos</div> : ""} </span>
-          <span>{data.lidaBem.crianca ? <div><img src={children} style={{ width: '45px', height: '45px' }}/>Crianças</div> : ""} </span>
-          <span>{data.lidaBem.cachorro ? <div><img src={dog} style={{ width: '45px', height: '45px' }}/>Cachorros</div> : ""} </span>
-
-
+        <span className={styles.animalName}>{data.name}</span>
+        <span className={styles.raca}>{data.raca}</span>
+        <div className={styles.grid}>
+          {data.saude.esterilizado ? <span><Icons image={happyCat} alt="Esterilizado" /></span> : null}
+          {data.saude.vacinado ? <span><Icons image={happyCat} alt="Vacinado" /></span> : null}
+          {data.saude.desparasitado ? <span><Icons image={happyCat} alt="Desparasitado" /></span> : null}
+        </div>
+        <span className={styles.raca}>Se dá bem com:</span>
+        <div className={styles.grid}>
+          {data.lidaBem.gato ? <span><Icons image={cat} alt="Outros gatos" /></span> : null}
+          {data.lidaBem.crianca ? <span><Icons image={cat} alt="Crianças" /></span> : null}
+          {data.lidaBem.cachorro ? <span><Icons image={dog} alt="Cachorros" /></span> : null}
+        </div>
+        {(data.especial.hiv || data.especial.deficiente) && (
+          <div>
+            <span className={styles.raca}>Especial</span>
+            <div className={styles.grid}>
+            {data.especial.hiv ? <span><Icons image={dog} alt="HIV" /></span> : null}
+            {data.especial.deficiente ? <span><Icons image={dog} alt="Deficiente" /></span> : null}
+            </div>
+          </div>
+        )}
+        <button className="btn btn-primary btn-sm" onClick={adoptMe}>Me Adote</button>
 
       </div>
     </ReactCardFlip>

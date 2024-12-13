@@ -30,7 +30,7 @@ const searchRect = () => {
       },
       especial: {
         deficiente: true,
-        hiv: false,
+        hiv: true,
       },
     },
     {
