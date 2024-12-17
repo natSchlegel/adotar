@@ -35,32 +35,43 @@ const FlipCard = ({ data }) => {
       </div>
       {/* Back Side */}
       <div className={styles.cardPersonalized} onClick={handleClick}>
+        
         <span className={styles.animalName}>{data.name}</span>
         <span className={styles.raca}>{data.raca}</span>
-        <div className={styles.grid}>
-          {data.saude.esterilizado ? <span><Icons image={happyCat} alt="Esterilizado" /></span> : null}
-          {data.saude.vacinado ? <span><Icons image={happyCat} alt="Vacinado" /></span> : null}
-          {data.saude.desparasitado ? <span><Icons image={happyCat} alt="Desparasitado" /></span> : null}
-        </div>
-        <span className={styles.raca}>Se dá bem com:</span>
-        <div className={styles.grid}>
-          {data.lidaBem.gato ? <span><Icons image={cat} alt="Outros gatos" /></span> : null}
-          {data.lidaBem.crianca ? <span><Icons image={cat} alt="Crianças" /></span> : null}
-          {data.lidaBem.cachorro ? <span><Icons image={dog} alt="Cachorros" /></span> : null}
-        </div>
-        {(data.especial.hiv || data.especial.deficiente) && (
+        
+        {(data.saude.esterilizado || data.saude.vacinado || data.saude.desparasitado) && (
           <div>
-            <span className={styles.raca}>Especial</span>
+            <span className={styles.raca}>Saúde:</span>
             <div className={styles.grid}>
-            {data.especial.hiv ? <span><Icons image={dog} alt="HIV" /></span> : null}
-            {data.especial.deficiente ? <span><Icons image={dog} alt="Deficiente" /></span> : null}
+              {data.saude.esterilizado ? <span><Icons image={happyCat} alt="Esterilizado" /></span> : null}
+              {data.saude.vacinado ? <span><Icons image={happyCat} alt="Vacinado" /></span> : null}
+              {data.saude.desparasitado ? <span><Icons image={happyCat} alt="Desparasitado" /></span> : null}
             </div>
           </div>
         )}
-        <button className="btn btn-primary btn-sm" onClick={adoptMe}>Me Adote</button>
 
-      </div>
-    </ReactCardFlip>
+      {(data.lidaBem.gato || data.lidaBem.crianca || data.lidaBem.cachorro) && (
+        <div><span className={styles.raca}>Se dá bem com:</span>
+          <div className={styles.grid}>
+            {data.lidaBem.gato ? <span><Icons image={cat} alt="Outros gatos" /></span> : null}
+            {data.lidaBem.crianca ? <span><Icons image={cat} alt="Crianças" /></span> : null}
+            {data.lidaBem.cachorro ? <span><Icons image={dog} alt="Cachorros" /></span> : null}
+          </div>
+          </div>
+      )}
+
+      {(data.especial.hiv || data.especial.deficiente) && (
+        <div>
+          <span className={styles.raca}>Especial</span>
+          <div className={styles.grid}>
+            {data.especial.hiv ? <span><Icons image={dog} alt="HIV" /></span> : null}
+            {data.especial.deficiente ? <span><Icons image={dog} alt="Deficiente" /></span> : null}
+          </div>
+        </div>
+      )}
+      <button className="btn btn-primary btn-sm" onClick={adoptMe}>Me Adote</button>
+    </div>
+    </ReactCardFlip >
   );
 };
 
