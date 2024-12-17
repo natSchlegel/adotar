@@ -1,22 +1,46 @@
 import React from "react";
+import { useState } from "react";
 
 const formSearch = () => {
+
+  
+
   return (
     <div>
-      <form id="animalForm">
+
+
+
+
+
+      {/* <form id="animalForm">
         <div>
           <div className="mb-3">
             <label className="form-label">
               Espécie
             </label>
-            {/* <select id="especie" name="especie" className="form-select" required>
+             <select id="especie" name="especie" className="form-select" required>
               <option value="" disabled selected>
                 Escolha a espécie
               </option>
               <option value="Gato">GATO</option>
               <option value="Cachorro">CACHORRO</option>
-            </select> */}
+            </select> 
           </div>
+          <label className="form-label">
+              Se dá bem com:
+            </label>
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+  <label class="form-check-label" for="defaultCheck1">
+    Crianças
+  </label>
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+  <label class="form-check-label" for="defaultCheck1">
+    Cachorros
+  </label>
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+  <label class="form-check-label" for="defaultCheck1">
+    Outros gatos
+  </label>
 
           <div className="mb-3">
             <label for="porte" className="form-label">
@@ -63,7 +87,7 @@ const formSearch = () => {
         <button type="submit" className="btn btn-primary">
           Enviar
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };

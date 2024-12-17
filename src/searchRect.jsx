@@ -1,72 +1,57 @@
-import React from "react";
-import Cat from "../img/cat.jpg";
-import Male from "../img/male.svg?react";
-import styles from "./searchRect.module.css";
-import localizacao from "../img/location.svg?react";
-import Mail from "../img/mail.svg?react";
-import Call from "../img/call.svg?react";
-import ReactCardFlip from "react-card-flip";
+import React, { useState, useEffect } from "react";
 import FlipCard from "./cards/Flipcart";
+import styles from "./searchRect.module.css";
 
-const searchRect = () => {
-  const data = [
-    {
-      id: 1,
-      name: "Lorde",
-      especie: "Gato",
-      raca: "Indefinida",
-      genero: "Fêmea",
-      meses: 13,
-      localizacao: "Diamantina",
-      saude: {
-        esterilizado: false,
-        vacinado: true,
-        desparasitado: true,
-      },
-      lidaBem: {
-        gato: false,
-        crianca: true,
-        cachorro: true,
-      },
-      especial: {
-        deficiente: true,
-        hiv: true,
-      },
-    },
-    {
-      id: 2,
-      name: "Kael",
-      especie: "Gato",
-      raca: "Indefinida",
-      genero: "Fêmea",
-      meses: 13,
-      localizacao: "Diamantina",
-      saude: {
-        esterilizado: true,
-        vacinado: false,
-        desparasitado: true,
-      },
-      lidaBem: {
-        gato: false,
-        crianca: true,
-        cachorro: false,
-      },
-      especial: {
-        deficiente: true,
-        hiv: false,
-      },
-    },
-  ];
+const SearchRect = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    fetch("https://natschlegel.github.io/adotar-api/animals-api.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const filteredData = data.filter((cat) =>
+    cat.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4">
-        {data.map((cat) => (
-          <FlipCard key={cat.id} data={cat} />
-        ))}
+    <div className={styles.searchContainer}>
+      <input
+        type="text"
+        className={styles.searchInput}
+        placeholder="Search by name..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
+      <div className={styles.catCards}>
+        {filteredData.length > 0 ? (
+          filteredData.map((cat) => <FlipCard key={cat.id} data={cat} />)
+        ) : (
+          <p>No matches found</p>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default searchRect;
+export default SearchRect;
