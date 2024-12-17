@@ -8,15 +8,27 @@ const SearchRect = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEspecie, setSelectedEspecie] = useState("");
-  const [selectedCriteria, setSelectedCriteria] = useState({
+  const [selectedRace, setselectedRace] = useState({
     criancas: false,
     cachorro: false,
     gatos: false
   });
+  const [selectedHealth, setselectedHealth] = useState({
+    esterilizado: false,
+    vacinado: false,
+    desparasitado: false
+  });
+
+
+
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-    setSelectedCriteria((prevCriteria) => ({
+    setselectedRace((prevCriteria) => ({
+      ...prevCriteria,
+      [name]: checked
+    }));
+    setselectedHealth((prevCriteria) => ({
       ...prevCriteria,
       [name]: checked
     }));
@@ -46,9 +58,13 @@ const SearchRect = () => {
 
   const filteredData = data.filter((cat) =>
     (selectedEspecie === "" || cat.especie.toLowerCase() === selectedEspecie.toLowerCase()) &&
-    cat.name.toLowerCase().includes(searchQuery.toLowerCase()) && (selectedCriteria.criancas === false || cat.lidaBem.crianca) &&
-    (selectedCriteria.cachorro === false || cat.lidaBem.cachorro) &&
-    (selectedCriteria.gatos === false || cat.lidaBem.gato)
+    cat.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    (selectedRace.criancas === false || cat.lidaBem.crianca) &&
+    (selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
+    (selectedRace.gatos === false || cat.lidaBem.gato) &&
+    (selectedHealth.esterilizado === false || cat.saude.esterilizado === selectedHealth.esterilizado) &&
+    (selectedHealth.vacinado === false || cat.saude.vacinado === selectedHealth.vacinado) &&
+    (selectedHealth.desparasitado === false || cat.saude.desparasitado === selectedHealth.desparasitado)
   );
 
   return (
@@ -60,6 +76,53 @@ const SearchRect = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+
+<label className="form-label">Filtrar por Saúde</label>
+
+{/* Esterilizado Filter */}
+<div className="form-check">
+  <input
+    type="checkbox"
+    className="form-check-input"
+    id="esterilizadoCheck"
+    name="esterilizado"  // Important: This matches the state property name
+    checked={selectedHealth.esterilizado}
+    onChange={handleCheckboxChange}  // Use handleCheckboxChange function
+  />
+  <label className="form-check-label" htmlFor="esterilizadoCheck">
+    Esterilizado
+  </label>
+</div>
+
+{/* Vacinado Filter */}
+<div className="form-check">
+  <input
+    type="checkbox"
+    className="form-check-input"
+    id="vacinadoCheck"
+    name="vacinado"  // Matches state property
+    checked={selectedHealth.vacinado}
+    onChange={handleCheckboxChange}  // Use handleCheckboxChange function
+  />
+  <label className="form-check-label" htmlFor="vacinadoCheck">
+    Vacinado
+  </label>
+</div>
+
+{/* Desparasitado Filter */}
+<div className="form-check">
+  <input
+    type="checkbox"
+    className="form-check-input"
+    id="desparasitadoCheck"
+    name="desparasitado"  // Matches state property
+    checked={selectedHealth.desparasitado}
+    onChange={handleCheckboxChange}  // Use handleCheckboxChange function
+  />
+  <label className="form-check-label" htmlFor="desparasitadoCheck">
+    Desparasitado
+  </label>
+</div>
 
       <select
         value={selectedEspecie}
@@ -79,7 +142,7 @@ const SearchRect = () => {
             type="checkbox"
             id="criancas"
             name="criancas"
-            checked={selectedCriteria.criancas}
+            checked={selectedRace.criancas}
             onChange={handleCheckboxChange}
           />
           <label className="form-check-label" htmlFor="criancas">
@@ -93,7 +156,7 @@ const SearchRect = () => {
             type="checkbox"
             id="cachorro"
             name="cachorro"
-            checked={selectedCriteria.cachorro}
+            checked={selectedRace.cachorro}
             onChange={handleCheckboxChange}
           />
           <label className="form-check-label" htmlFor="cachorro">
@@ -107,7 +170,7 @@ const SearchRect = () => {
             type="checkbox"
             id="gatos"
             name="gatos"
-            checked={selectedCriteria.gatos}
+            checked={selectedRace.gatos}
             onChange={handleCheckboxChange}
           />
           <label className="form-check-label" htmlFor="gatos">
