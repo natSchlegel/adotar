@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect,useMemo } from "react";
 import FlipCard from "./cards/Flipcart";
 import styles from "./searchRect.module.css";
 
@@ -11,16 +11,11 @@ const SearchRect = () => {
   const [selectedRace, setselectedRace] = useState({
     criancas: false,
     cachorro: false,
-    gatos: false
-  });
-  const [selectedHealth, setselectedHealth] = useState({
+    gatos: false,
     esterilizado: false,
     vacinado: false,
     desparasitado: false
   });
-
-
-
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -28,12 +23,7 @@ const SearchRect = () => {
       ...prevCriteria,
       [name]: checked
     }));
-    setselectedHealth((prevCriteria) => ({
-      ...prevCriteria,
-      [name]: checked
-    }));
   };
-
 
   useEffect(() => {
     fetch("https://natschlegel.github.io/adotar-api/animals-api.json")
@@ -53,19 +43,24 @@ const SearchRect = () => {
       });
   }, []);
 
+  const filteredData = useMemo(() => {
+    return (data || []).filter((cat) =>
+      (selectedEspecie === "" || cat.especie.toLowerCase() === selectedEspecie.toLowerCase()) &&
+      cat.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (selectedRace.criancas === false || cat.lidaBem.crianca) &&
+      (selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
+      (selectedRace.gatos === false || cat.lidaBem.gato) &&
+      (selectedRace.esterilizado === false || cat.saude.esterilizado === selectedRace.esterilizado) &&
+      (selectedRace.vacinado === false || cat.saude.vacinado === selectedRace.vacinado) &&
+      (selectedRace.desparasitado === false || cat.saude.desparasitado === selectedRace.desparasitado)
+    );
+  }, [data, selectedEspecie, searchQuery, selectedRace]);
+  
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  const filteredData = data.filter((cat) =>
-    (selectedEspecie === "" || cat.especie.toLowerCase() === selectedEspecie.toLowerCase()) &&
-    cat.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    (selectedRace.criancas === false || cat.lidaBem.crianca) &&
-    (selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
-    (selectedRace.gatos === false || cat.lidaBem.gato) &&
-    (selectedHealth.esterilizado === false || cat.saude.esterilizado === selectedHealth.esterilizado) &&
-    (selectedHealth.vacinado === false || cat.saude.vacinado === selectedHealth.vacinado) &&
-    (selectedHealth.desparasitado === false || cat.saude.desparasitado === selectedHealth.desparasitado)
-  );
+
 
   return (
     <div className={styles.searchContainer}>
@@ -86,7 +81,7 @@ const SearchRect = () => {
     className="form-check-input"
     id="esterilizadoCheck"
     name="esterilizado"  // Important: This matches the state property name
-    checked={selectedHealth.esterilizado}
+    checked={selectedRace.esterilizado}
     onChange={handleCheckboxChange}  // Use handleCheckboxChange function
   />
   <label className="form-check-label" htmlFor="esterilizadoCheck">
@@ -101,7 +96,7 @@ const SearchRect = () => {
     className="form-check-input"
     id="vacinadoCheck"
     name="vacinado"  // Matches state property
-    checked={selectedHealth.vacinado}
+    checked={selectedRace.vacinado}
     onChange={handleCheckboxChange}  // Use handleCheckboxChange function
   />
   <label className="form-check-label" htmlFor="vacinadoCheck">
@@ -116,7 +111,7 @@ const SearchRect = () => {
     className="form-check-input"
     id="desparasitadoCheck"
     name="desparasitado"  // Matches state property
-    checked={selectedHealth.desparasitado}
+    checked={selectedRace.desparasitado}
     onChange={handleCheckboxChange}  // Use handleCheckboxChange function
   />
   <label className="form-check-label" htmlFor="desparasitadoCheck">
