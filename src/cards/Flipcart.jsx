@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import styles from "./Flipcart.module.css";
 import catImg from "../../img/cat.jpg?react";
@@ -7,6 +7,8 @@ import happyCat from "../../img/happyCat.svg";
 import sadCat from "../../img/sadCat.svg";
 import dog from "../../img/dog.svg";
 import cat from "../../img/cat.svg";
+import children from "../../img/children.svg";
+
 
 const FlipCard = ({ data }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -54,7 +56,7 @@ const FlipCard = ({ data }) => {
         <div><span className={styles.raca}>Se dá bem com:</span>
           <div className={styles.grid}>
             {data.lidaBem.gato ? <span><Icons image={cat} alt="Outros gatos" /></span> : null}
-            {data.lidaBem.crianca ? <span><Icons image={cat} alt="Crianças" /></span> : null}
+            {data.lidaBem.crianca ? <span><Icons image={children} alt="Crianças" /></span> : null}
             {data.lidaBem.cachorro ? <span><Icons image={dog} alt="Cachorros" /></span> : null}
           </div>
           </div>
@@ -64,8 +66,8 @@ const FlipCard = ({ data }) => {
         <div>
           <span className={styles.raca}>Especial</span>
           <div className={styles.grid}>
-            {data.especial.hiv ? <span><Icons image={dog} alt="HIV" /></span> : null}
-            {data.especial.deficiente ? <span><Icons image={dog} alt="Deficiente" /></span> : null}
+            {data.especial.hiv ? <span><Icons image={sadCat} alt="HIV" /></span> : null}
+            {data.especial.deficiente ? <span><Icons image={sadCat} alt="Deficiente" /></span> : null}
           </div>
         </div>
       )}
