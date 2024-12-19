@@ -1,11 +1,10 @@
 import React from 'react';
-import Header from './header';
-import Banner from './banner';
-import Search from './search';
-import Footer from './footer';
+import Banner from './Home/Header/Banner';
+import Search from './Home/Search/Search';
+import Footer from './Footer';
 
 
-const home = () => {
+const Home = () => {
   return (
     <div>
       <Banner />
@@ -15,4 +14,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home;

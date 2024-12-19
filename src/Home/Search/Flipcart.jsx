@@ -1,13 +1,13 @@
 import React, { Children, useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import styles from "./Flipcart.module.css";
-import catImg from "../../img/cat.jpg?react";
+import catImg from "../../../img/cat.jpg?react";
 import Icons from "./Icons";
-import happyCat from "../../img/happyCat.svg";
-import sadCat from "../../img/sadCat.svg";
-import dog from "../../img/dog.svg";
-import cat from "../../img/cat.svg";
-import children from "../../img/children.svg";
+import happyCat from "../../../img/happyCat.svg";
+import sadCat from "../../../img/sadCat.svg";
+import dog from "../../../img/dog.svg";
+import cat from "../../../img/cat.svg";
+import children from "../../../img/children.svg";
 
 
 const FlipCard = ({ data }) => {

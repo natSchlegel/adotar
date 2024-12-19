@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './banner.module.css';
+import styles from './Banner.module.css';
 
-const banner = () => {
+const Banner = () => {
   return (
     <div className={styles.container}>
         <section className="py-5 text-center container">
@@ -24,4 +24,4 @@ const banner = () => {
   )
 }
 
-export default banner
+export default Banner;

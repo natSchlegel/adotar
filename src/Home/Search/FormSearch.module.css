@@ -1,0 +1,103 @@
+.tituloGato {
+    display: flex;
+  }
+  
+  .localizacao {
+    display: flex;
+    height: 30px;
+    margin: 10px 0 10px 0;
+  }
+  
+  .localizacaoCidade{
+      padding-left: 6px;
+  }
+  
+  .infoContainer {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 15px;
+  }
+  
+  .circle {
+      width: 50px;       
+      height: 50px;     
+      background-color: #3498db;  
+      border-radius: 50%; 
+  }
+  
+  .circleCall {
+      width: 25px;       
+      height: 25px;     
+      background-color: #cc8254;  
+      border-radius: 50%; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .circleMail {
+      width: 25px;       
+      height: 25px;     
+      background-color: #227d3a;  
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .callsvg {
+      width: 20px;       
+      height: 20px;   
+  }
+  
+  .mallsvg {
+      width: 20px;       
+      height: 20px; 
+  }
+  
+  .infoContainer {
+      display: flex;
+      gap: 20px;
+    }
+  
+  .dono {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  } 
+  
+  .iconesContato{
+      display: flex;
+      gap: 5px;
+      cursor: pointer;
+  
+  }
+  
+  .nomeAnimal {
+      font-size: 25px;
+      padding-right: 7px;
+  }
+    
+  .infoBox {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fce4ec; /* Light pink background */
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  .infoBox span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  .label {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+  }
+  

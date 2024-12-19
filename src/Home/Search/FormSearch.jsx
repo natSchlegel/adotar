@@ -1,9 +1,9 @@
 import React from "react";
 import { useState,useMemo } from "react";
-import styles from "./searchRect.module.css";
-import FlipCard from "./cards/Flipcart";
+import styles from "./FormSearch.module.css";
+import FlipCard from "./Flipcart";
 
-const formSearch = ({data}) => {
+const FormSearch = ({data}) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEspecie, setSelectedEspecie] = useState("");
@@ -159,4 +159,4 @@ const formSearch = ({data}) => {
   );
 };
 
-export default formSearch;
+export default FormSearch;

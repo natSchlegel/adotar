@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
-import styles from "./searchRect.module.css";
-import FormSearch from "./formSearch.jsx";
+import React from "react";
+import FormSearch from "./FormSearch.jsx";
 
-const SearchRect = () => {
+const Search = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,8 +29,12 @@ const SearchRect = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <FormSearch data={data} />    
+    <div className="album py-5 bg-body-tertiary">
+      <div className="container">
+      <FormSearch data={data} />    
+      </div>
+    </div>
   );
 };
 
-export default SearchRect;
+export default Search;

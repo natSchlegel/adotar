@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./icons.module.css";
+import styles from "./Icons.module.css";
 
 const Icons = ({image, alt}) => {
   return (

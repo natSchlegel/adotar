@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./header.module.css";
+import styles from "./Header.module.css";
 
-const header = () => {
+const Header = () => {
   return (
     <div>
       <header className="p-3 text-bg-dark">
@@ -60,4 +60,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
