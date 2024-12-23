@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Sobre from "./Sobre";
-import Header from "./Home/Header/Header";
-
+import Header from  "./Home/Header/Header";
 
 function App() {
   return (
