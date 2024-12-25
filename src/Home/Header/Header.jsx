@@ -4,6 +4,7 @@ import Logo from "../../../img/logo.svg";
 import Instagram from "../../../img/instagram.svg";
 import Facebook from "../../../img/facebook.svg";
 import { useState, useEffect } from "react";
+import LogoInline from "../../../img/logoinline.svg";
 
 
 const Header = () => {
@@ -25,12 +26,10 @@ const Header = () => {
     };
   }, []);
 
-
-
   return (
     <div className={isSticky ? styles.menuSticky : styles.menu}>
       <div className={styles.logo}>
-        <img src={Logo} />
+        <img src={isSticky ? LogoInline: Logo} />
       </div>
       <div className={styles.nav}>
         <a>sobre</a>

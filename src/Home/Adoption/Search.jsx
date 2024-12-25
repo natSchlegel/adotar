@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import React from "react";
 import FormSearch from "./FormSearch.jsx";
+import styles from "./Search.module.css";
 
 const Search = () => {
   const [data, setData] = useState(null);
@@ -29,11 +30,9 @@ const Search = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="album py-5 bg-body-tertiary">
-      <div className="container">
+      <div className={styles.container}>
       <FormSearch data={data} />    
       </div>
-    </div>
   );
 };
 
