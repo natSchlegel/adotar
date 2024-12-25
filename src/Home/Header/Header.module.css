@@ -12,7 +12,22 @@ html, body {
     grid-template-rows: 100px auto 100px;
     padding: 30px 150px;
     height: 100vh;
+    position: relative;
 }
+
+.menuSticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: black;
+    z-index: 1000;
+    display: flex;
+}
+
+.hidden {
+    display: none !important;
+  }
 
 .textInside{
     padding: 100px 200px;
@@ -63,6 +78,7 @@ html, body {
     font-weight: 400;
     color: white;
     padding-left: 80px;
+    gap: 20px;
 }
 
 .social{
