@@ -91,6 +91,11 @@ html, body {
     gap: 20px;
 }
 
+.nav a{
+    text-decoration: none;
+    color: white;
+}
+
 .social{
     grid-column:  4;
     grid-row: 4;

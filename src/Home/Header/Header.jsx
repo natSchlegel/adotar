@@ -5,6 +5,7 @@ import Instagram from "../../../img/instagram.svg";
 import Facebook from "../../../img/facebook.svg";
 import { useState, useEffect } from "react";
 import LogoInline from "../../../img/logoinline.svg";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -33,7 +34,8 @@ const Header = () => {
       </div>
       <div className={styles.nav}>
         <a>sobre</a>
-        <a>adote</a>
+        <Link to="/adocao" aria-label="Adoção"><a>adote</a></Link>
+        
         <a>doações</a>
         <a>perguntas frequentes</a>
         <a>contato</a>
