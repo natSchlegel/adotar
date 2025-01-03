@@ -1,10 +1,10 @@
 import React from "react";
-import { createContext, useState,useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

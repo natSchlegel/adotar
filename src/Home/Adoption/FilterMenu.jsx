@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styles from "./FilterMenu.module.css";
 import { useState, useMemo } from "react";
 import { DataContext } from "./DataContext";
+import Results from "./Results";
 
 const FilterMenu = () => {
   const { data, loading, error } = useContext(DataContext);
@@ -147,6 +148,7 @@ const FilterMenu = () => {
           Outros gatos
         </label>
       </div>
+      <Results filteredData={filteredData}/>
     </>
   );
 };
