@@ -4,54 +4,50 @@ import { useState, useMemo } from "react";
 import { DataContext } from "./DataContext";
 
 const FilterMenu = () => {
-  const [state, setState] = useState({
-    searchQuery: "",
-    selectedEspecie: "",
-    selectedRace: {
-      criancas: false,
-      cachorro: false,
-      gatos: false,
-      esterilizado: false,
-      vacinado: false,
-      desparasitado: false,
-    },
-  });
-
   const { data, loading, error } = useContext(DataContext);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  const filteredData =
-    (() => {
-      return (data || []).filter(
-        (cat) =>
-          (state.selectedEspecie === "" ||
-            cat.especie.toLowerCase() ===
-              state.selectedEspecie.toLowerCase()) &&
-          cat.name.toLowerCase().includes(state.searchQuery.toLowerCase()) &&
-          (state.selectedRace.criancas === false || cat.lidaBem.crianca) &&
-          (state.selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
-          (state.selectedRace.gatos === false || cat.lidaBem.gato) &&
-          (state.selectedRace.esterilizado === false ||
-            cat.saude.esterilizado === state.selectedRace.esterilizado) &&
-          (state.selectedRace.vacinado === false ||
-            cat.saude.vacinado === state.selectedRace.vacinado) &&
-          (state.selectedRace.desparasitado === false ||
-            cat.saude.desparasitado === state.selectedRace.desparasitado)
-      );
-    },
-    [data, state.selectedEspecie, state.searchQuery, state.selectedRace]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedEspecie, setSelectedEspecie] = useState("");
+  const [selectedRace, setselectedRace] = useState({
+    criancas: false,
+    cachorro: false,
+    gatos: false,
+    esterilizado: false,
+    vacinado: false,
+    desparasitado: false,
+  });
 
-  // const handleCheckboxChange = (event) => {
-  //   const { name, checked } = event.target;
-  //   onFilterChange((filters) => ({
-  //     ...filters,
-  //     [name]: checked,
-  //   }));
-  // };
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setselectedRace((prevCriteria) => ({
+      ...prevCriteria,
+      [name]: checked,
+    }));
+  };
 
-  
+  const filteredData = useMemo(() => {
+    return (data || []).filter(
+      (cat) =>
+        (selectedEspecie === "" ||
+          cat.especie.toLowerCase() === selectedEspecie.toLowerCase()) &&
+        cat.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (selectedRace.criancas === false || cat.lidaBem.crianca) &&
+        (selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
+        (selectedRace.gatos === false || cat.lidaBem.gato) &&
+        (selectedRace.esterilizado === false ||
+          cat.saude.esterilizado === selectedRace.esterilizado) &&
+        (selectedRace.vacinado === false ||
+          cat.saude.vacinado === selectedRace.vacinado) &&
+        (selectedRace.desparasitado === false ||
+          cat.saude.desparasitado === selectedRace.desparasitado)
+    );
+  }, [data, selectedEspecie, searchQuery, selectedRace]);
+
+  console.log(filteredData);
+
   return (
     <>
       <label className="form-label">Filtrar por Saúde</label>
