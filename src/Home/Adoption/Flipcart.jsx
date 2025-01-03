@@ -22,8 +22,6 @@ const FlipCard = ({ data }) => {
     window.alert("Test");
   }
 
-  console.log(data);
-
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       {/* Front Side */}

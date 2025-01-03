@@ -28,28 +28,29 @@ const Header = () => {
   }, []);
 
   return (
-    <div className={isSticky ? styles.menuSticky : styles.menu}>
-      <div className={styles.logo}>
-        <img src={isSticky ? LogoInline: Logo} />
-      </div>
-      <div className={styles.nav}>
-        <a>sobre</a>
-        <Link to="/adocao" aria-label="Adoção"><a>adote</a></Link>
+    <div></div>
+    // <div className={isSticky ? styles.menuSticky : styles.menu}>
+    //   <div className={styles.logo}>
+    //     <img src={isSticky ? LogoInline: Logo} />
+    //   </div>
+    //   <div className={styles.nav}>
+    //     <a>sobre</a>
+    //     <Link to="/adocao" aria-label="Adoção"><a>adote</a></Link>
         
-        <a>doações</a>
-        <a>perguntas frequentes</a>
-        <a>contato</a>
-      </div>
-      <div className={`${styles.text} ${isSticky ? styles.hidden : ''}`}>
-        “Cada ato de amor
-        e compaixão por um
-        animal é uma
-        contribuição para
-        um mundo melhor. ”</div>
-        <div className={`${styles.social} ${isSticky ? styles.hidden : ''}`}>
-        <img src={Facebook} /><img src={Instagram} /></div>
-    </div>
-  );
+    //     <a>doações</a>
+    //     <a>perguntas frequentes</a>
+    //     <a>contato</a>
+    //   </div>
+    //   <div className={`${styles.text} ${isSticky ? styles.hidden : ''}`}>
+    //     “Cada ato de amor
+    //     e compaixão por um
+    //     animal é uma
+    //     contribuição para
+    //     um mundo melhor. ”</div>
+    //     <div className={`${styles.social} ${isSticky ? styles.hidden : ''}`}>
+    //     <img src={Facebook} /><img src={Instagram} /></div>
+    // </div>
+   );
 };
 
 export default Header;

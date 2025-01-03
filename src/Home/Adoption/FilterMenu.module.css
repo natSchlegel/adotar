@@ -1,0 +1,16 @@
+.searchLeft {
+    background-color: aqua;
+    width: 300px;
+    position: sticky;
+    height: 100vh;
+}
+
+.titleFilterMenu{
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.filterSelection{
+    font-size: 20px;
+    color: darkblue;
+}

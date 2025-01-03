@@ -1,20 +1,9 @@
 import React from "react";
 import { useState,useMemo } from "react";
 import styles from "./FormSearch.module.css";
-import FlipCard from "./Flipcart";
+
 
 const FormSearch = ({data}) => {
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedEspecie, setSelectedEspecie] = useState("");
-  const [selectedRace, setselectedRace] = useState({
-    criancas: false,
-    cachorro: false,
-    gatos: false,
-    esterilizado: false,
-    vacinado: false,
-    desparasitado: false
-  });
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -23,19 +12,6 @@ const FormSearch = ({data}) => {
       [name]: checked
     }));
   };
-
-  const filteredData = useMemo(() => {
-    return (data || []).filter((cat) =>
-      (selectedEspecie === "" || cat.especie.toLowerCase() === selectedEspecie.toLowerCase()) &&
-      cat.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      (selectedRace.criancas === false || cat.lidaBem.crianca) &&
-      (selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
-      (selectedRace.gatos === false || cat.lidaBem.gato) &&
-      (selectedRace.esterilizado === false || cat.saude.esterilizado === selectedRace.esterilizado) &&
-      (selectedRace.vacinado === false || cat.saude.vacinado === selectedRace.vacinado) &&
-      (selectedRace.desparasitado === false || cat.saude.desparasitado === selectedRace.desparasitado)
-    );
-  }, [data, selectedEspecie, searchQuery, selectedRace]);
 
   return (
     <>
@@ -145,15 +121,7 @@ const FormSearch = ({data}) => {
             Outros gatos
           </label>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4">
 
-          {filteredData.length > 0 ? (
-            filteredData.map((cat) => <FlipCard key={cat.id} data={cat} />)
-          ) : (
-            <p>No matches found</p>
-          )}
-
-        </div>
       </div>
     </>
   );
