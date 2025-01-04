@@ -5,10 +5,7 @@ import { DataContext } from "./DataContext";
 import Results from "./Results";
 
 const FilterMenu = () => {
-  const { data, loading, error } = useContext(DataContext);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  const { data, loading, error} = useContext(DataContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEspecie, setSelectedEspecie] = useState("");
@@ -47,7 +44,8 @@ const FilterMenu = () => {
     );
   }, [data, selectedEspecie, searchQuery, selectedRace]);
 
-  console.log(filteredData);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <>
@@ -148,7 +146,6 @@ const FilterMenu = () => {
           Outros gatos
         </label>
       </div>
-      <Results filteredData={filteredData}/>
     </>
   );
 };

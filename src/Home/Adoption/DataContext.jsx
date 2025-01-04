@@ -4,7 +4,6 @@ import { createContext, useState, useEffect } from "react";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +12,9 @@ export const DataProvider = ({ children }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://natschlegel.github.io/adotar-api/animals-api.json");
+        const response = await fetch(
+          "https://natschlegel.github.io/adotar-api/animals-api.json"
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -30,7 +31,9 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ data, loading, error }}>
+    <DataContext.Provider
+      value={{ data, loading, error }}
+    >
       {children}
     </DataContext.Provider>
   );
