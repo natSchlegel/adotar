@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import styles from "./FilterMenu.module.css";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { DataContext } from "./DataContext";
-import Results from "./Results";
 
 const FilterMenu = () => {
-  const { data, loading, error} = useContext(DataContext);
+  const { data, loading, error, setFilteredData} = useContext(DataContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEspecie, setSelectedEspecie] = useState("");
@@ -26,7 +25,7 @@ const FilterMenu = () => {
     }));
   };
 
-  const filteredData = useMemo(() => {
+  const aux = useMemo(() => {
     return (data || []).filter(
       (cat) =>
         (selectedEspecie === "" ||
@@ -43,6 +42,10 @@ const FilterMenu = () => {
           cat.saude.desparasitado === selectedRace.desparasitado)
     );
   }, [data, selectedEspecie, searchQuery, selectedRace]);
+
+  useEffect(() => {
+    setFilteredData(aux);
+  }, [aux, setFilteredData]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;

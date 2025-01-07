@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import FlipCard from './Flipcart';
 import { DataContext } from './DataContext';
 
-const Results = ({ filteredData }) => {
 
-    const {data, error, loading} = useContext(DataContext);
+const Results = () => {
+
+    const {data, error, loading, filteredData} = useContext(DataContext);
     
     if (loading) {
         return <p>Loading...</p>;

@@ -7,6 +7,7 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [filteredData, setFilteredData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,8 +33,7 @@ export const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ data, loading, error }}
-    >
+      value={{ data, loading, error, filteredData, setFilteredData }} >
       {children}
     </DataContext.Provider>
   );

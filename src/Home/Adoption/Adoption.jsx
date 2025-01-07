@@ -11,7 +11,7 @@ const Adoption = () => {
       <div className={styles.searchLeft}>
         <DataProvider>
           <FilterMenu />
-          <Results filteredData={filteredData} />
+          <Results/>
         </DataProvider>
       </div>
     </div>
