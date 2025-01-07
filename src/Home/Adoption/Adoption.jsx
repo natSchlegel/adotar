@@ -5,15 +5,16 @@ import { DataProvider } from "./DataContext";
 import Results from "./Results";
 
 const Adoption = () => {
-
   return (
     <div className={styles.search}>
-      <div className={styles.searchLeft}>
-        <DataProvider>
+      <DataProvider>
+        <div className={styles.searchLeft}>
           <FilterMenu />
-          <Results/>
-        </DataProvider>
-      </div>
+        </div>
+        <div className={styles.searchRight}>
+          <Results />
+        </div>
+      </DataProvider>
     </div>
   );
 };

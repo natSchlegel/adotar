@@ -2,3 +2,13 @@
     display: flex;
 }
 
+.searchLeft{
+    display: flex !important;
+    width: 306px;
+    max-width: 306px;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid var(--park-gray-90);
+    height: 100vh;
+    flex-direction: column;
+}
