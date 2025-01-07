@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import styles from "./FilterMenu.module.css";
-import { useState, useMemo, useEffect } from "react";
 import { DataContext } from "./DataContext";
 
 const FilterMenu = () => {
-  const { data, loading, error, setFilteredData} = useContext(DataContext);
+  const { data, loading, error, setFilteredData } = useContext(DataContext);
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedEspecie, setSelectedEspecie] = useState("");
-  const [selectedRace, setselectedRace] = useState({
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    searchQuery: "",
+    especie: "",
     criancas: false,
     cachorro: false,
     gatos: false,
@@ -17,139 +17,170 @@ const FilterMenu = () => {
     desparasitado: false,
   });
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    setselectedRace((prevCriteria) => ({
-      ...prevCriteria,
-      [name]: checked,
+  const handleCardClick = (filterKey) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      especie: prevFilters.especie === filterKey ? "" : filterKey, // Toggle species filter
+    }));
+  };
+  
+  const isSelected = (filterKey) => selectedFilters.especie === filterKey;
+
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const aux = useMemo(() => {
+  // Filter data based on selected filters
+  const filteredData = useMemo(() => {
     return (data || []).filter(
       (cat) =>
-        (selectedEspecie === "" ||
-          cat.especie.toLowerCase() === selectedEspecie.toLowerCase()) &&
-        cat.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        (selectedRace.criancas === false || cat.lidaBem.crianca) &&
-        (selectedRace.cachorro === false || cat.lidaBem.cachorro) &&
-        (selectedRace.gatos === false || cat.lidaBem.gato) &&
-        (selectedRace.esterilizado === false ||
-          cat.saude.esterilizado === selectedRace.esterilizado) &&
-        (selectedRace.vacinado === false ||
-          cat.saude.vacinado === selectedRace.vacinado) &&
-        (selectedRace.desparasitado === false ||
-          cat.saude.desparasitado === selectedRace.desparasitado)
+        (selectedFilters.especie === "" ||
+          cat.especie.toLowerCase() === selectedFilters.especie.toLowerCase()) &&
+        cat.name.toLowerCase().includes(selectedFilters.searchQuery.toLowerCase()) &&
+        (!selectedFilters.criancas || cat.lidaBem.crianca) &&
+        (!selectedFilters.cachorro || cat.lidaBem.cachorro) &&
+        (!selectedFilters.gatos || cat.lidaBem.gato) &&
+        (!selectedFilters.esterilizado || cat.saude.esterilizado) &&
+        (!selectedFilters.vacinado || cat.saude.vacinado) &&
+        (!selectedFilters.desparasitado || cat.saude.desparasitado)
     );
-  }, [data, selectedEspecie, searchQuery, selectedRace]);
+  }, [data, selectedFilters]);
 
+  // Update filtered data whenever filters change
   useEffect(() => {
-    setFilteredData(aux);
-  }, [aux, setFilteredData]);
+    setFilteredData(filteredData);
+  }, [filteredData, setFilteredData]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
-      <label className="form-label">Filtrar por Saúde</label>
+    <div className={styles.filterMenu}>
+      <h2 className={styles.title}>Filtrar Animais</h2>
 
-      <div className="form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="esterilizadoCheck"
-          name="esterilizado"
-          checked={selectedEspecie.esterilizado}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-check-label" htmlFor="esterilizadoCheck">
-          Esterilizado
-        </label>
-      </div>
+      <div
+  className={`filterCard ${isSelected("Cachorro") ? "selected" : "light"}`}
+  onClick={() => handleCardClick("Cachorro")}
+>
+  <img src="/img/cat.svg" alt="Cachorro" className="filter-icon" />
+  <span>Gato</span>
+</div>
 
-      <div className="form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="vacinadoCheck"
-          name="vacinado"
-          checked={selectedRace.vacinado}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-check-label" htmlFor="vacinadoCheck">
-          Vacinado
-        </label>
-      </div>
+      <input
+        type="text"
+        name="searchQuery"
+        className={styles.filterInput}
+        placeholder="Nome do Animal"
+        value={selectedFilters.searchQuery}
+        onChange={handleInputChange}
+      />
 
-      <div className="form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="desparasitadoCheck"
-          name="desparasitado"
-          checked={selectedRace.desparasitado}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-check-label" htmlFor="desparasitadoCheck">
-          Desparasitado
-        </label>
-      </div>
-
+      <label className={styles.formLabel}>Espécie</label>
       <select
-        value={selectedEspecie}
-        onChange={(e) => setSelectedEspecie(e.target.value)}
+        name="especie"
+        value={selectedFilters.especie}
+        onChange={handleInputChange}
         className={styles.filterDropdown}
       >
-        <option value="">All</option>
+        <option value="">Todos</option>
         <option value="Gato">Gato</option>
         <option value="Cachorro">Cachorro</option>
       </select>
 
-      <label className="form-label">Se dá bem com:</label>
+      <label className={styles.formLabel}>Filtrar por Saúde</label>
+      <div className={styles.filterGroup}>
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="esterilizadoCheck"
+            name="esterilizado"
+            checked={selectedFilters.esterilizado}
+            onChange={handleInputChange}
+          />
+          <label className="form-check-label" htmlFor="esterilizadoCheck">
+            Esterilizado
+          </label>
+        </div>
 
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          id="criancas"
-          name="criancas"
-          checked={selectedRace.criancas}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-check-label" htmlFor="criancas">
-          Crianças
-        </label>
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="vacinadoCheck"
+            name="vacinado"
+            checked={selectedFilters.vacinado}
+            onChange={handleInputChange}
+          />
+          <label className="form-check-label" htmlFor="vacinadoCheck">
+            Vacinado
+          </label>
+        </div>
+
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="desparasitadoCheck"
+            name="desparasitado"
+            checked={selectedFilters.desparasitado}
+            onChange={handleInputChange}
+          />
+          <label className="form-check-label" htmlFor="desparasitadoCheck">
+            Desparasitado
+          </label>
+        </div>
       </div>
 
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          id="cachorro"
-          name="cachorro"
-          checked={selectedRace.cachorro}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-check-label" htmlFor="cachorro">
-          Cachorros
-        </label>
-      </div>
+      <label className={styles.formLabel}>Se dá bem com:</label>
+      <div className={styles.filterGroup}>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="criancas"
+            name="criancas"
+            checked={selectedFilters.criancas}
+            onChange={handleInputChange}
+          />
+          <label className="form-check-label" htmlFor="criancas">
+            Crianças
+          </label>
+        </div>
 
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          id="gatos"
-          name="gatos"
-          checked={selectedRace.gatos}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-check-label" htmlFor="gatos">
-          Outros gatos
-        </label>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="cachorro"
+            name="cachorro"
+            checked={selectedFilters.cachorro}
+            onChange={handleInputChange}
+          />
+          <label className="form-check-label" htmlFor="cachorro">
+            Cachorros
+          </label>
+        </div>
+
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="gatos"
+            name="gatos"
+            checked={selectedFilters.gatos}
+            onChange={handleInputChange}
+          />
+          <label className="form-check-label" htmlFor="gatos">
+            Outros gatos
+          </label>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

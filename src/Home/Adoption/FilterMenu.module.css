@@ -14,3 +14,18 @@
     font-size: 20px;
     color: darkblue;
 }
+
+.filterCard {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .filterCard.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+  }
+  
