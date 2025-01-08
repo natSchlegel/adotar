@@ -4,7 +4,53 @@
 
 .searchLeft{
     background-color: #ffffff;
-    width: 350px;
+    width: 20%;
     position: sticky;
     height: 100vh;
 }
+
+.searchRight{
+    width: 80%;
+}
+
+.headerSearch {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9b5b5;
+    padding: 10px 20px;
+    height: 45px;
+  }
+  
+  
+  .headerTitle {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Inter", serif;
+    color: white;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .headerButton {
+    position: absolute;
+    right: 20px;
+    font-family: "Inter", serif;
+    background-color: #5b3b3b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    transition: background-color 0.3s;
+  }
+  
+  .headerButton:hover {
+    background-color: #4a2f2f;
+  }
+  

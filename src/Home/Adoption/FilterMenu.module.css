@@ -1,6 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 .filterMenu {
-  background-color: aqua;
-  max-width: 300px;
   position: sticky;
   height: 100vh;
 }
@@ -19,12 +19,45 @@
     max-width: 100%;
     height: auto;
     display: block;
+    color: white;
+    fill: white;
   }
+
+  .filterLineCard img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    color: white;
+    fill: white;
+  }
+
+  .filterCard span {
+    color: white;
+    font-family: "Inter", serif;
+    font-size: 10px;
+    font-weight: 300;
+    
+  }
+  .filterLineCard span {
+    color: white;
+    font-family: "Inter", serif;
+    font-size: 10px;
+    font-weight: 300;
+    
+  }
+
 
 .filterGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 20px;
+  padding:  0 20px;
+}
+
+.filterLineGrid {
+  display: grid;
+  grid-template-columns: repeat(3,33%);
+  padding:  0 20px;
 }
 
 .filterSection {
@@ -32,7 +65,7 @@
 }
 
 .filterSubtitle {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 10px;
   color: #5b3b3b;
 }
@@ -42,7 +75,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
   color: white;
@@ -50,8 +83,30 @@
   cursor: pointer;
   text-align: center;
   transition: transform 0.2s;
-  width: 100%;
+  width: 115px;
+  height: 115px;
+  padding: 20px;
 }
+
+.filterLineCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #0056b3;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s;
+  width: 75px;
+  height: 75px;
+  padding: 10px;
+}
+
 
 .filterCard:hover {
   transform: scale(1.05);
