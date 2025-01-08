@@ -23,7 +23,7 @@ const FilterMenu = () => {
   const handleCardClick = (filterKey) => {
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
-      especie: prevFilters.especie === filterKey ? "" : filterKey, // Toggle species filter
+      especie: prevFilters.especie === filterKey ? "" : filterKey,
     }));
   };
 
@@ -37,7 +37,20 @@ const FilterMenu = () => {
     }));
   };
 
-  // Filter data based on selected filters
+  const handleHealthFilterClick = (filterKey) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterKey]: !prevFilters[filterKey],
+    }));
+  };
+
+  const handleCompatibilityFilterClick = (filterKey) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterKey]: !prevFilters[filterKey],
+    }));
+  };
+
   const filteredData = useMemo(() => {
     return (data || []).filter(
       (cat) =>
@@ -70,212 +83,92 @@ const FilterMenu = () => {
       <div className={styles.filterSection}>
         <h3 className={styles.filterSubtitle}>Espécie</h3>
         <div className={styles.filterGrid}>
-          <div className={`${styles.filterCard} ${styles.dark}`}>
-            <img src={gato} alt="Gato" className={styles.filterIcon} />
-            <span>Gato</span>
-          </div>
-          <div className={`${styles.filterCard} ${styles.dark}`}>
-            <img src={cachorro} alt="Cachorro" className={styles.filterIcon} />
-            <span>Cachorro</span>
-          </div>
-          <div className={`${styles.filterCard} ${styles.dark}`}>
-            <img src={peixe} alt="Peixe" className={styles.filterIcon} />
-            <span>Peixe</span>
-          </div>
-          <div className={`${styles.filterCard} ${styles.dark}`}>
-            <img src={passaro} alt="Pássaro" className={styles.filterIcon} />
-            <span>Pássaro</span>
-          </div>
+          {[
+            { key: "Gato", img: gato, label: "Gato" },
+            { key: "Cachorro", img: cachorro, label: "Cachorro" },
+            { key: "Peixe", img: peixe, label: "Peixe" },
+            { key: "Pássaro", img: passaro, label: "Pássaro" },
+          ].map((item) => (
+            <div
+              key={item.key}
+              className={`${styles.filterCard} ${
+                isSelected(item.key) ? styles.dark : styles.light
+              }`}
+              onClick={() => handleCardClick(item.key)}
+            >
+              <img
+                src={item.img}
+                alt={item.label}
+                className={styles.filterIcon}
+              />
+              <span>{item.label}</span>
+            </div>
+          ))}
         </div>
       </div>
+
       <div className={styles.filterSection}>
         <h3 className={styles.filterSubtitle}>Compatibilidade</h3>
         <div className={styles.filterGrid}>
-          <div className={`${styles.filterCard} ${styles.dark}`}>
-            <img
-              src="/img/cat-friendly.png"
-              alt="Gatos"
-              className={styles.filterIcon}
-            />
-            <span>Gatos</span>
-          </div>
-          <div className={`${styles.filterCard} ${styles.light}`}>
-            <img
-              src="/img/dog-friendly.png"
-              alt="Cachorros"
-              className={styles.filterIcon}
-            />
-            <span>Cachorros</span>
-          </div>
-          <div className={`${styles.filterCard} ${styles.dark}`}>
-            <img
-              src="/img/baby.png"
-              alt="Bebês"
-              className={styles.filterIcon}
-            />
-            <span>Bebês</span>
-          </div>
-        </div>
-        <div className={styles.filterSection}>
-          <h3 className={styles.filterSubtitle}>Saúde</h3>
-          <div className={styles.filterGrid}>
-            <div className={`${styles.filterCard} ${styles.dark}`}>
+          {[
+            { key: "gatos", img: "/img/cat-friendly.png", label: "Gatos" },
+            {
+              key: "cachorro",
+              img: "/img/dog-friendly.png",
+              label: "Cachorros",
+            },
+            { key: "criancas", img: "/img/baby.png", label: "Bebês" },
+          ].map((item) => (
+            <div
+              key={item.key}
+              className={`${styles.filterCard} ${
+                selectedFilters[item.key] ? styles.dark : styles.light
+              }`}
+              onClick={() => handleCompatibilityFilterClick(item.key)}
+            >
               <img
-                src="/img/vaccine.png"
-                alt="Vacinado"
+                src={item.img}
+                alt={item.label}
                 className={styles.filterIcon}
               />
-              <span>Vacinado</span>
+              <span>{item.label}</span>
             </div>
-            <div className={`${styles.filterCard} ${styles.light}`}>
+          ))}
+        </div>
+      </div>
+      <div className={styles.filterSection}>
+        <h3 className={styles.filterSubtitle}>Saúde</h3>
+        <div className={styles.filterGrid}>
+          {[
+            { key: "vacinado", img: "/img/vaccine.png", label: "Vacinado" },
+            {
+              key: "esterilizado",
+              img: "/img/sterilized.png",
+              label: "Esterilizado",
+            },
+            {
+              key: "desparasitado",
+              img: "/img/dewormed.png",
+              label: "Vermifugado",
+            },
+          ].map((item) => (
+            <div
+              key={item.key}
+              className={`${styles.filterCard} ${
+                selectedFilters[item.key] ? styles.dark : styles.light
+              }`}
+              onClick={() => handleHealthFilterClick(item.key)}
+            >
               <img
-                src="/img/sterilized.png"
-                alt="Esterilizado"
+                src={item.img}
+                alt={item.label}
                 className={styles.filterIcon}
               />
-              <span>Esterilizado</span>
+              <span>{item.label}</span>
             </div>
-            <div className={`${styles.filterCard} ${styles.dark}`}>
-              <img
-                src="/img/dewormed.png"
-                alt="Vermifugado"
-                className={styles.filterIcon}
-              />
-              <span>Vermifugado</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-
-      <div className={`${styles.filterCard} ${isSelected("Cachorro") ? styles.dark : styles.light}`} onClick={() => handleCardClick("Cachorro")}>
-        <img src="/img/cat.svg" alt="Cachorro" className="filter-icon" />
-        <span>Cachorro</span>
-      </div>
-
-      {/* <div
-        className={`filterCard ${isSelected("Cachorro") ? "selected" : "light"
-          }`}
-        onClick={() => handleCardClick("Cachorro")}
-      >
-        <img src="/img/cat.svg" alt="Cachorro" className="filter-icon" />
-        <span>Gato</span>
-      </div>
-
-      <div className={`${styles.filterCard} ${styles.dark}`}>
-        <img src={cachorro} alt="Cachorro" class="filter-icon" />
-        <span>Cachorro</span>
-      </div>
-      "filterCard dark" */}
-
-      {/* <input
-        type="text"
-        name="searchQuery"
-        className={styles.filterInput}
-        placeholder="Nome do Animal"
-        value={selectedFilters.searchQuery}
-        onChange={handleInputChange}
-      />
-
-      <label className={styles.formLabel}>Espécie</label>
-      <select
-        name="especie"
-        value={selectedFilters.especie}
-        onChange={handleInputChange}
-        className={styles.filterDropdown}
-      >
-        <option value="">Todos</option>
-        <option value="Gato">Gato</option>
-        <option value="Cachorro">Cachorro</option>
-      </select>
-
-      <label className={styles.formLabel}>Filtrar por Saúde</label>
-      <div className={styles.filterGroup}>
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="esterilizadoCheck"
-            name="esterilizado"
-            checked={selectedFilters.esterilizado}
-            onChange={handleInputChange}
-          />
-          <label className="form-check-label" htmlFor="esterilizadoCheck">
-            Esterilizado
-          </label>
-        </div>
-
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="vacinadoCheck"
-            name="vacinado"
-            checked={selectedFilters.vacinado}
-            onChange={handleInputChange}
-          />
-          <label className="form-check-label" htmlFor="vacinadoCheck">
-            Vacinado
-          </label>
-        </div>
-
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="desparasitadoCheck"
-            name="desparasitado"
-            checked={selectedFilters.desparasitado}
-            onChange={handleInputChange}
-          />
-          <label className="form-check-label" htmlFor="desparasitadoCheck">
-            Desparasitado
-          </label>
-        </div>
-      </div>
-
-      <label className={styles.formLabel}>Se dá bem com:</label>
-      <div className={styles.filterGroup}>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="criancas"
-            name="criancas"
-            checked={selectedFilters.criancas}
-            onChange={handleInputChange}
-          />
-          <label className="form-check-label" htmlFor="criancas">
-            Crianças
-          </label>
-        </div>
-
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="cachorro"
-            name="cachorro"
-            checked={selectedFilters.cachorro}
-            onChange={handleInputChange}
-          />
-          <label className="form-check-label" htmlFor="cachorro">
-            Cachorros
-          </label>
-        </div>
-
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="gatos"
-            name="gatos"
-            checked={selectedFilters.gatos}
-            onChange={handleInputChange}
-          />
-          <label className="form-check-label" htmlFor="gatos">
-            Outros gatos
-          </label>
-        </div> */}
     </div>
   );
 };
