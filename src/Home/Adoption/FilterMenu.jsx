@@ -20,6 +20,13 @@ const FilterMenu = () => {
     desparasitado: false,
   });
 
+  const handleFilterToggle = (filterKey) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [filterKey]: !prev[filterKey],
+    }));
+  };
+
   const handleCardClick = (filterKey) => {
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
@@ -28,28 +35,6 @@ const FilterMenu = () => {
   };
 
   const isSelected = (filterKey) => selectedFilters.especie === filterKey;
-
-  const handleInputChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleHealthFilterClick = (filterKey) => {
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterKey]: !prevFilters[filterKey],
-    }));
-  };
-
-  const handleCompatibilityFilterClick = (filterKey) => {
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterKey]: !prevFilters[filterKey],
-    }));
-  };
 
   const filteredData = useMemo(() => {
     return (data || []).filter(
@@ -69,7 +54,6 @@ const FilterMenu = () => {
     );
   }, [data, selectedFilters]);
 
-  // Update filtered data whenever filters change
   useEffect(() => {
     setFilteredData(filteredData);
   }, [filteredData, setFilteredData]);
@@ -77,96 +61,73 @@ const FilterMenu = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  const renderFilterCards = (filters, clickHandler) =>
+    filters.map((item) => (
+      <div
+        key={item.key}
+        className={`${styles.filterCard} ${
+          selectedFilters[item.key] ? styles.dark : styles.light
+        }`}
+        onClick={() => clickHandler(item.key)}
+      >
+        <img src={item.img} alt={item.label} className={styles.filterIcon} />
+        <span>{item.label}</span>
+      </div>
+    ));
+
   return (
     <div className={styles.filterMenu}>
       <h2 className={styles.titleFilterMenu}>Filtrar Animais</h2>
       <div className={styles.filterSection}>
         <h3 className={styles.filterSubtitle}>Espécie</h3>
         <div className={styles.filterGrid}>
-          {[
-            { key: "Gato", img: gato, label: "Gato" },
-            { key: "Cachorro", img: cachorro, label: "Cachorro" },
-            { key: "Peixe", img: peixe, label: "Peixe" },
-            { key: "Pássaro", img: passaro, label: "Pássaro" },
-          ].map((item) => (
-            <div
-              key={item.key}
-              className={`${styles.filterCard} ${
-                isSelected(item.key) ? styles.dark : styles.light
-              }`}
-              onClick={() => handleCardClick(item.key)}
-            >
-              <img
-                src={item.img}
-                alt={item.label}
-                className={styles.filterIcon}
-              />
-              <span>{item.label}</span>
-            </div>
-          ))}
+          {renderFilterCards(
+            [
+              { key: "Gato", img: gato, label: "Gato" },
+              { key: "Cachorro", img: cachorro, label: "Cachorro" },
+              { key: "Peixe", img: peixe, label: "Peixe" },
+              { key: "Pássaro", img: passaro, label: "Pássaro" },
+            ],
+            handleCardClick
+          )}
         </div>
       </div>
-
       <div className={styles.filterSection}>
         <h3 className={styles.filterSubtitle}>Compatibilidade</h3>
         <div className={styles.filterGrid}>
-          {[
-            { key: "gatos", img: "/img/cat-friendly.png", label: "Gatos" },
-            {
-              key: "cachorro",
-              img: "/img/dog-friendly.png",
-              label: "Cachorros",
-            },
-            { key: "criancas", img: "/img/baby.png", label: "Bebês" },
-          ].map((item) => (
-            <div
-              key={item.key}
-              className={`${styles.filterCard} ${
-                selectedFilters[item.key] ? styles.dark : styles.light
-              }`}
-              onClick={() => handleCompatibilityFilterClick(item.key)}
-            >
-              <img
-                src={item.img}
-                alt={item.label}
-                className={styles.filterIcon}
-              />
-              <span>{item.label}</span>
-            </div>
-          ))}
+          {renderFilterCards(
+            [
+              { key: "gatos", img: "/img/cat-friendly.png", label: "Gatos" },
+              {
+                key: "cachorro",
+                img: "/img/dog-friendly.png",
+                label: "Cachorros",
+              },
+              { key: "criancas", img: "/img/baby.png", label: "Bebês" },
+            ],
+            handleFilterToggle
+          )}
         </div>
       </div>
       <div className={styles.filterSection}>
         <h3 className={styles.filterSubtitle}>Saúde</h3>
         <div className={styles.filterGrid}>
-          {[
-            { key: "vacinado", img: "/img/vaccine.png", label: "Vacinado" },
-            {
-              key: "esterilizado",
-              img: "/img/sterilized.png",
-              label: "Esterilizado",
-            },
-            {
-              key: "desparasitado",
-              img: "/img/dewormed.png",
-              label: "Vermifugado",
-            },
-          ].map((item) => (
-            <div
-              key={item.key}
-              className={`${styles.filterCard} ${
-                selectedFilters[item.key] ? styles.dark : styles.light
-              }`}
-              onClick={() => handleHealthFilterClick(item.key)}
-            >
-              <img
-                src={item.img}
-                alt={item.label}
-                className={styles.filterIcon}
-              />
-              <span>{item.label}</span>
-            </div>
-          ))}
+          {renderFilterCards(
+            [
+              { key: "vacinado", img: "/img/vaccine.png", label: "Vacinado" },
+              {
+                key: "esterilizado",
+                img: "/img/sterilized.png",
+                label: "Esterilizado",
+              },
+              {
+                key: "desparasitado",
+                img: "/img/dewormed.png",
+                label: "Vermifugado",
+              },
+            ],
+            handleFilterToggle
+          )}
         </div>
       </div>
     </div>
