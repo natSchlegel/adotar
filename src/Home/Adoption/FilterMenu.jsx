@@ -1,10 +1,13 @@
 import React, { useContext, useState, useMemo, useEffect } from "react";
 import styles from "./FilterMenu.module.css";
 import { DataContext } from "./DataContext";
+import cachorro from "../../../img/filterMenu/dog.svg";
+import gato from "../../../img/filterMenu/cat.svg";
+import peixe from "../../../img/filterMenu/fish.svg";
+import passaro from "../../../img/filterMenu/bird.svg";
 
 const FilterMenu = () => {
   const { data, loading, error, setFilteredData } = useContext(DataContext);
-
 
   const [selectedFilters, setSelectedFilters] = useState({
     searchQuery: "",
@@ -23,7 +26,7 @@ const FilterMenu = () => {
       especie: prevFilters.especie === filterKey ? "" : filterKey, // Toggle species filter
     }));
   };
-  
+
   const isSelected = (filterKey) => selectedFilters.especie === filterKey;
 
   const handleInputChange = (event) => {
@@ -39,8 +42,11 @@ const FilterMenu = () => {
     return (data || []).filter(
       (cat) =>
         (selectedFilters.especie === "" ||
-          cat.especie.toLowerCase() === selectedFilters.especie.toLowerCase()) &&
-        cat.name.toLowerCase().includes(selectedFilters.searchQuery.toLowerCase()) &&
+          cat.especie.toLowerCase() ===
+            selectedFilters.especie.toLowerCase()) &&
+        cat.name
+          .toLowerCase()
+          .includes(selectedFilters.searchQuery.toLowerCase()) &&
         (!selectedFilters.criancas || cat.lidaBem.crianca) &&
         (!selectedFilters.cachorro || cat.lidaBem.cachorro) &&
         (!selectedFilters.gatos || cat.lidaBem.gato) &&
@@ -60,17 +66,108 @@ const FilterMenu = () => {
 
   return (
     <div className={styles.filterMenu}>
-      <h2 className={styles.title}>Filtrar Animais</h2>
+      <h2 className={styles.titleFilterMenu}>Filtrar Animais</h2>
+      <div className={styles.filterSection}>
+        <h3 className={styles.filterSubtitle}>Espécie</h3>
+        <div className={styles.filterGrid}>
+          <div className={`${styles.filterCard} ${styles.dark}`}>
+            <img src={gato} alt="Gato" className={styles.filterIcon} />
+            <span>Gato</span>
+          </div>
+          <div className={`${styles.filterCard} ${styles.dark}`}>
+            <img src={cachorro} alt="Cachorro" className={styles.filterIcon} />
+            <span>Cachorro</span>
+          </div>
+          <div className={`${styles.filterCard} ${styles.dark}`}>
+            <img src={peixe} alt="Peixe" className={styles.filterIcon} />
+            <span>Peixe</span>
+          </div>
+          <div className={`${styles.filterCard} ${styles.dark}`}>
+            <img src={passaro} alt="Pássaro" className={styles.filterIcon} />
+            <span>Pássaro</span>
+          </div>
+        </div>
+      </div>
+      <div className={styles.filterSection}>
+        <h3 className={styles.filterSubtitle}>Compatibilidade</h3>
+        <div className={styles.filterGrid}>
+          <div className={`${styles.filterCard} ${styles.dark}`}>
+            <img
+              src="/img/cat-friendly.png"
+              alt="Gatos"
+              className={styles.filterIcon}
+            />
+            <span>Gatos</span>
+          </div>
+          <div className={`${styles.filterCard} ${styles.light}`}>
+            <img
+              src="/img/dog-friendly.png"
+              alt="Cachorros"
+              className={styles.filterIcon}
+            />
+            <span>Cachorros</span>
+          </div>
+          <div className={`${styles.filterCard} ${styles.dark}`}>
+            <img
+              src="/img/baby.png"
+              alt="Bebês"
+              className={styles.filterIcon}
+            />
+            <span>Bebês</span>
+          </div>
+        </div>
+        <div className={styles.filterSection}>
+          <h3 className={styles.filterSubtitle}>Saúde</h3>
+          <div className={styles.filterGrid}>
+            <div className={`${styles.filterCard} ${styles.dark}`}>
+              <img
+                src="/img/vaccine.png"
+                alt="Vacinado"
+                className={styles.filterIcon}
+              />
+              <span>Vacinado</span>
+            </div>
+            <div className={`${styles.filterCard} ${styles.light}`}>
+              <img
+                src="/img/sterilized.png"
+                alt="Esterilizado"
+                className={styles.filterIcon}
+              />
+              <span>Esterilizado</span>
+            </div>
+            <div className={`${styles.filterCard} ${styles.dark}`}>
+              <img
+                src="/img/dewormed.png"
+                alt="Vermifugado"
+                className={styles.filterIcon}
+              />
+              <span>Vermifugado</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div
-  className={`filterCard ${isSelected("Cachorro") ? "selected" : "light"}`}
-  onClick={() => handleCardClick("Cachorro")}
->
-  <img src="/img/cat.svg" alt="Cachorro" className="filter-icon" />
-  <span>Gato</span>
-</div>
+      <div className={`${styles.filterCard} ${isSelected("Cachorro") ? styles.dark : styles.light}`} onClick={() => handleCardClick("Cachorro")}>
+        <img src="/img/cat.svg" alt="Cachorro" className="filter-icon" />
+        <span>Cachorro</span>
+      </div>
 
-      <input
+      {/* <div
+        className={`filterCard ${isSelected("Cachorro") ? "selected" : "light"
+          }`}
+        onClick={() => handleCardClick("Cachorro")}
+      >
+        <img src="/img/cat.svg" alt="Cachorro" className="filter-icon" />
+        <span>Gato</span>
+      </div>
+
+      <div className={`${styles.filterCard} ${styles.dark}`}>
+        <img src={cachorro} alt="Cachorro" class="filter-icon" />
+        <span>Cachorro</span>
+      </div>
+      "filterCard dark" */}
+
+      {/* <input
         type="text"
         name="searchQuery"
         className={styles.filterInput}
@@ -178,8 +275,7 @@ const FilterMenu = () => {
           <label className="form-check-label" htmlFor="gatos">
             Outros gatos
           </label>
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };
