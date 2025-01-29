@@ -1,0 +1,55 @@
+.slick-arrow.slick-next,
+.slick-arrow.slick-prev{
+background-color: #428cff;
+height:25px;
+width: 25px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+opacity: 0.8;
+}
+
+.slick-arrow.slick-next:hover,
+.slick-arrow.slick-prev:hover
+{
+    background-color: #2574f5;
+    opacity:1;
+}
+
+
+.slick-prev::before,.slick-next::before{
+   display:none;
+    
+    }
+
+.arrows{
+height:45px;
+width:45px;
+margin: 1px;
+background-color: #428cff;
+
+}
+
+.custom-prev-arrow,
+.custom-next-arrow {
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  width: 40px; 
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5); 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-prev-arrow {
+  left: 10px; 
+  background-color: black;
+}
+
+.custom-next-arrow {
+  right: 10px; 
+}

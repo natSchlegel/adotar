@@ -7,7 +7,10 @@
 
 .titleFilterMenu {
   font-weight: 400;
-  font-size: 20px;
+  font-size: 32px;
+  padding: 27px 20px;
+  color: #42494F;
+  
 }
 
 .filterSelection {
@@ -67,7 +70,8 @@
 .filterSubtitle {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #5b3b3b;
+  color: #42494F;
+  padding: 0 20px;
 }
 .filterCard {
   display: flex;

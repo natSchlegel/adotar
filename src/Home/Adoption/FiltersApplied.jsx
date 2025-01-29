@@ -1,17 +1,11 @@
-import React from 'react'
+import React from 'react';
+import styles from './FiltersApplied.module.css';
 
 const FiltersApplied = () => {
 
-    const style = {
-        width: "100vh",
-      };
-
-
-    
-    
   return (
-    <div>
-      <p style={style}>Filters Applied</p>
+    <div className={styles.filters}>
+      <div className={styles.filterTag}>Gato    x</div><div className={styles.filterTag}>Compatibilidade com cachorros    x</div><div className={styles.filterTag}>Compatibilidade com crianças    x</div>
     </div>
   )
 }
